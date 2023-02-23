@@ -47,15 +47,14 @@
             map.remove();
         }
     });
-
-    function resizeMap() {
-        if (map) {
-            map.invalidateSize();
-        }
-    }
 </script>
 
-<svelte:window on:resize={resizeMap} />
+<svelte:window on:resize={() => {
+    if(map){
+        map.invalidateSize();
+    }
+}}
+/>
 <main>
     <div bind:this={mapElement} />
 </main>
