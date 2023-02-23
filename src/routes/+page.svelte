@@ -14,7 +14,7 @@ onMount(async () => {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
         leaflet.marker([54.78065463305339, 8.82010421472079], {title: "tj", interactive: true}).addTo(map)
-        leaflet.marker([37.15667659707556, -7.567374318490646], {title: "björn", interactive: true}).addTo(map)
+        leaflet.marker([37.15667659707556, -7.567374318490646], {title: "bhotel", interactive: true}).addTo(map)
         leaflet.marker([48.1319107636191, 11.597328269263155], {title: "wg", interactive: true}).addTo(map)
         leaflet.marker([54.86601997512145, 8.664989118933663], {title: "eltern", interactive: true}).addTo(map)
         leaflet.marker([53.5839063248693, 10.030755051845581], {title: "bruder", interactive: true}).addTo(map)
@@ -22,6 +22,7 @@ onMount(async () => {
         leaflet.marker([54.86966009631935, 8.895859553098285], {title: "lde", interactive: true}).addTo(map)
         leaflet.marker([52.256295421053245, 8.1017744410037], {title: "ex", interactive: true}).addTo(map)
         leaflet.marker([54.778399572631464, 8.827109637840012], {title: "ng", interactive: true}).addTo(map)
+        leaflet.marker([53.526107661188796, 8.128171334775397], {title: "gh", interactive: true}).addTo(map)
     }
 })
 
