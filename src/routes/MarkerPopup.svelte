@@ -2,4 +2,10 @@
   export let src: string;
 </script>
 
-<img {src} alt="the sticker at this place" style="width: 20em"/>
+<img {src} alt="the sticker at this place"/>
+
+<style>
+    img {
+        width: 20em;
+    }
+</style>
