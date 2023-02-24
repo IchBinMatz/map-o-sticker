@@ -3,16 +3,19 @@
   import { onDestroy, onMount, SvelteComponent } from "svelte";
   import toilet from "$lib/assets/toilet.png";
   import layl from "$lib/assets/fotos/layl.jpg";
-  import bhotel from "$lib/assets/fotos/portugal.jpg"
-  import timo from '$lib/assets/fotos/t.jpg'
-  import L from "leaflet";
+  import bhotel from "$lib/assets/fotos/portugal.jpg";
+  import timo from "$lib/assets/fotos/t.jpg";
   import MarkerPopup from "./MarkerPopup.svelte";
 
   let mapElement: HTMLDivElement;
   let map: L.Map;
-  let places: { name: string; loc: [number, number], img?: string }[] = [
-    { name: "tj", loc: [54.78065463305339, 8.82010421472079], img: timo},
-    { name: "bhotel", loc: [37.15667659707556, -7.567374318490646], img: bhotel},
+  let places: { name: string; loc: [number, number]; img?: string }[] = [
+    { name: "tj", loc: [54.78065463305339, 8.82010421472079], img: timo },
+    {
+      name: "bhotel",
+      loc: [37.15667659707556, -7.567374318490646],
+      img: bhotel,
+    },
     { name: "wg", loc: [48.1319107636191, 11.597328269263155] },
     { name: "party", loc: [48.13122540161655, 11.595708636957829] },
     { name: "eltern", loc: [54.86601997512145, 8.664989118933663] },
@@ -26,31 +29,30 @@
     { name: "autobahn", loc: [53.300584250313534, 9.534203569285786] },
   ];
 
-  function bindPopup(
-    marker: L.Marker,
-    createFn: (container: HTMLElement) => SvelteComponent
-  ) {
-    let popupComponent: SvelteComponent | null;
-    marker.bindPopup(() => {
-      let container = L.DomUtil.create("div");
-      popupComponent = createFn(container);
-      return container;
-    });
-
-    marker.on("popupclose", () => {
-      if (popupComponent) {
-        let old = popupComponent;
-        popupComponent = null;
-        setTimeout(() => {
-          old.$destroy();
-        }, 500);
-      }
-    });
-  }
-
   onMount(async () => {
     if (browser) {
       const leaflet = await import("leaflet");
+      function bindPopup(
+        marker: L.Marker,
+        createFn: (container: HTMLElement) => SvelteComponent
+      ) {
+        let popupComponent: SvelteComponent | null;
+        marker.bindPopup(() => {
+          let container = leaflet.DomUtil.create("div");
+          popupComponent = createFn(container);
+          return container;
+        });
+
+        marker.on("popupclose", () => {
+          if (popupComponent) {
+            let old = popupComponent;
+            popupComponent = null;
+            setTimeout(() => {
+              old.$destroy();
+            }, 500);
+          }
+        });
+      }
       let myIcon = leaflet.icon({ iconUrl: toilet, iconSize: [30, 30] });
       map = leaflet
         .map(mapElement)
@@ -64,17 +66,17 @@
         .addTo(map);
       places.map((p) => {
         let marker = leaflet.marker(p.loc, { title: p.name, icon: myIcon });
-        let img = p.img
+        let img = p.img;
         if (img != undefined) {
-            bindPopup(marker, (t) => {
-                let c = new MarkerPopup({
-                    target: t,
-                    props: {
-                        src: img as string,
-                    },
-                });
-                return c;
+          bindPopup(marker, (t) => {
+            let c = new MarkerPopup({
+              target: t,
+              props: {
+                src: img as string,
+              },
             });
+            return c;
+          });
         }
         marker.addTo(map);
       });
