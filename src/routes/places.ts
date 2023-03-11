@@ -3,6 +3,7 @@ import bhotel from "$lib/assets/fotos/portugal.jpg";
 import tj from "$lib/assets/fotos/t.jpg";
 import bruder from "$lib/assets/fotos/bruder.jpg";
 import klanxbuell from "$lib/assets/fotos/klanxbuell.jpg";
+import eugen from "$lib/assets/fotos/eugen.jpg";
 
 type Place = {
   name: string;
@@ -70,6 +71,7 @@ export let places: Place[] = [
   {
     name: "eugen",
     loc: [54.79189596344652, 8.829217573238308],
+    img: eugen
   },
   {
     name: "mitmFahrrad",
